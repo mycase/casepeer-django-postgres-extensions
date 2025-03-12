@@ -1,6 +1,6 @@
-import collections
+from collections.abc import MutableSet
 
-class OrderedSet(collections.MutableSet):
+class OrderedSet(MutableSet):
     """
     With thanks to http://code.activestate.com/recipes/576694/
     """
