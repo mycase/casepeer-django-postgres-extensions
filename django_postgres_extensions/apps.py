@@ -1,5 +1,5 @@
 from django.apps import AppConfig
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.db.models import query
 from django.db.models.sql import datastructures
 from .models.query import update, _update, format, prefetch_one_level
