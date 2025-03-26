@@ -7,7 +7,7 @@ from django.db import models
 from django.db.models.fields.related import RECURSIVE_RELATIONSHIP_CONSTANT, lazy_related_operation
 from django.forms.models import ModelMultipleChoiceField
 import six
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from .related_lookups import RelatedArrayContains, RelatedArrayExact, RelatedArrayContainedBy, RelatedContainsItem, \
     RelatedArrayOverlap, RelatedAnyGreaterThan, RelatedAnyLessThanOrEqual, RelatedAnyLessThan, RelatedAnyGreaterThanOrEqual
 
@@ -135,7 +135,7 @@ class ArrayManyToManyField(ArrayField, RelatedField):
 
             self.opts = cls._meta
             if self.remote_field.related_name:
-                related_name = force_text(self.remote_field.related_name) % {
+                related_name = force_str(self.remote_field.related_name) % {
                     'class': cls.__name__.lower(),
                     'app_label': cls._meta.app_label.lower()
                 }
