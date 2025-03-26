@@ -9,7 +9,7 @@ from django.db.models import Prefetch
 from django.db.models.query import get_prefetcher
 from django.test import TestCase, override_settings
 from django.utils import six
-from django.utils.encoding import force_text
+from django.utils.encoding import force_str
 from unittest import skip
 
 from .models import (
