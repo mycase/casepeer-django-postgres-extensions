@@ -1,5 +1,4 @@
 from django.db.models.sql.subqueries import UpdateQuery as BaseUpdateQuery
-import six
 from django.core.exceptions import FieldError
 
 class UpdateQuery(BaseUpdateQuery):
@@ -10,7 +9,7 @@ class UpdateQuery(BaseUpdateQuery):
         querysets.
         """
         values_seq = []
-        for name, val in six.iteritems(values):
+        for name, val in values.items():
             if '__' in name:
                 indexes = name.split('__')
                 field_name = indexes.pop(0)

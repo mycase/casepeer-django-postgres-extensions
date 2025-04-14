@@ -1,8 +1,5 @@
-from __future__ import unicode_literals
-
 from django.forms import widgets
 from django.utils.safestring import mark_safe
-from django.utils.html import format_html
 import copy
 
 class NestedFormWidget(widgets.MultiWidget):

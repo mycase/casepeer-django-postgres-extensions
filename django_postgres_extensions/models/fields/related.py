@@ -6,7 +6,6 @@ from .related_descriptors import MultiReferenceDescriptor
 from django.db import models
 from django.db.models.fields.related import RECURSIVE_RELATIONSHIP_CONSTANT, lazy_related_operation
 from django.forms.models import ModelMultipleChoiceField
-import six
 from django.utils.encoding import force_str
 from .related_lookups import RelatedArrayContains, RelatedArrayExact, RelatedArrayContainedBy, RelatedContainsItem, \
     RelatedArrayOverlap, RelatedAnyGreaterThan, RelatedAnyLessThanOrEqual, RelatedAnyLessThan, RelatedAnyGreaterThanOrEqual
@@ -27,7 +26,7 @@ class ArrayManyToManyField(ArrayField, RelatedField):
         try:
             to_str = to._meta.model_name
         except AttributeError:
-            assert isinstance(to, six.string_types), (
+            assert isinstance(to, str), (
                 "%s(%r) is invalid. First parameter to ForeignKey must be "
                 "either a model, a model name, or the string %r" % (
                     self.__class__.__name__, to,
@@ -188,7 +187,7 @@ class ArrayManyToManyField(ArrayField, RelatedField):
     def resolve_related_fields(self):
         if len(self.from_fields) < 1 or len(self.from_fields) != len(self.to_fields):
             raise ValueError('Foreign Object from and to fields must be the same non-zero length')
-        if isinstance(self.remote_field.model, six.string_types):
+        if isinstance(self.remote_field.model, str):
             raise ValueError('Related model %r cannot be resolved' % self.remote_field.model)
         related_fields = []
         for index in range(len(self.from_fields)):

@@ -1,7 +1,7 @@
 from django.contrib.postgres import fields as django_fields
 from django.contrib.postgres.forms import SplitArrayField as SplitArrayFormField
 from django.forms.fields import TypedMultipleChoiceField
-from psycopg2.extras import Json
+from psycopg.types.json import Json
 from django_postgres_extensions.forms.fields import NestedFormField
 from django_postgres_extensions.models.expressions import F, Value as V
 from django_postgres_extensions.models.functions import HStore, Delete, ArrayRemove

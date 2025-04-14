@@ -1,5 +1,6 @@
 from django.contrib.admin.options import ModelAdmin
-from django.utils.translation import string_concat, ugettext as _
+from django.utils.translation import gettext as _
+from django.utils.text import format_lazy as string_concat
 from django.forms.widgets import CheckboxSelectMultiple, SelectMultiple
 from django_postgres_extensions.models import ArrayManyToManyField
 from django.contrib.admin import widgets

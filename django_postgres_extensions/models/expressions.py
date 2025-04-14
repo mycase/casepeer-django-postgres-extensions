@@ -1,5 +1,4 @@
 from django.db.models.expressions import F as BaseF, Value as BaseValue, Func, Expression
-import six
 from django.contrib.postgres.fields.array import IndexTransform
 from django.utils.functional import cached_property
 from django.db.models.lookups import Transform
@@ -93,7 +92,7 @@ class SliceArray(Transform):
 
 
 def Key(field, keys_string):
-    if isinstance(keys_string, six.string_types) and '__' in keys_string:
+    if isinstance(keys_string, str) and '__' in keys_string:
         keys = keys_string.split('__')
         expression = F(field).path(Value(keys))
     else:

@@ -1,6 +1,5 @@
 from django.db.models.expressions import Func, Expression
 from django.db.models.sql.constants import GET_ITERATOR_CHUNK_SIZE
-import six
 from .expressions import F, Value as V
 
 class SimpleFunc(Func):
@@ -60,7 +59,7 @@ class ArrayCat(Func):
         if not isinstance(field, Expression):
             field = F(field)
         if not isinstance(value, Expression):
-            if isinstance(value, six.string_types):
+            if isinstance(value, str):
                 value = F(value)
             elif output_field:
                 value = V(value, output_field = output_field)
