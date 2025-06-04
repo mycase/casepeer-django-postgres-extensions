@@ -1,6 +1,7 @@
 from django.db.models.sql.datastructures import Join as BaseJoin
+from django.db.models.sql.where import WhereNode  # <-- Add this import
 
-#class Join(BaseJoin):
+# class Join(BaseJoin):
 
 def as_sql(self, compiler, connection):
     """
@@ -17,8 +18,9 @@ def as_sql(self, compiler, connection):
 
     for index, (lhs_col, rhs_col) in enumerate(self.join_cols):
         if hasattr(self.join_field, 'get_join_on'):
-            join_condition = self.join_field.get_join_on(qn(self.parent_alias), qn2(lhs_col), qn(self.table_alias),
-                                                         qn2(rhs_col))
+            join_condition = self.join_field.get_join_on(
+                qn(self.parent_alias), qn2(lhs_col), qn(self.table_alias), qn2(rhs_col)
+            )
             join_conditions.append(join_condition)
         else:
             join_conditions.append('%s.%s = %s.%s' % (
@@ -31,7 +33,8 @@ def as_sql(self, compiler, connection):
     # Add a single condition inside parentheses for whatever
     # get_extra_restriction() returns.
     extra_cond = self.join_field.get_extra_restriction(
-        compiler.query.where_class, self.table_alias, self.parent_alias)
+        WhereNode, self.table_alias, self.parent_alias  # <-- Use WhereNode instead of compiler.query.where_class
+    )
     if extra_cond:
         extra_sql, extra_params = compiler.compile(extra_cond)
         join_conditions.append('(%s)' % extra_sql)
